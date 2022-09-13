@@ -86,8 +86,9 @@ class App extends Component {
                 }
             ];
             return (
-                <Container>
+                <Container >
                     <Table
+                        style={{paddingBottom:  "70px"}}
                         dataSource={students}
                         columns={columns}
                         pagination={false}
@@ -100,10 +101,9 @@ class App extends Component {
                         width={1000}>
                         <AddStudentForm />
                     </Modal>
-                    <Footer
+                    {<Footer
                         numberOfStudents={students.length}
-                        handleAddStudentClickEvent={this.openAddStudentModal}>
-                    </Footer>
+                        handleAddStudentClickEvent={this.openAddStudentModal}/>}
                 </Container>
             );
         }

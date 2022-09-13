@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Formik } from "formik";
 import { Input,Button,Tag } from 'antd';
+import { addNewStudent } from "../client";
 
 const inputBottomMargin = {marginBottom: '10px'};
 const tagStyle = {backgroundColor: '#f50', color: 'white', ...inputBottomMargin, position: 'relative'};
@@ -30,13 +31,12 @@ class AddStudentForm extends Component {
                     }
                     return errors;
                 }}
-                onSubmit={(values, {setSubmitting}) => {
-                    setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2));
+                onSubmit={(student, {setSubmitting}) => {
+                    addNewStudent(student).then(() => {
+                        alert(JSON.stringify(student));
                         setSubmitting(false);
-                    }, 400);
-                }}
-            >
+                    })
+                }}>
                 {({
                       values,
                       errors,
@@ -45,6 +45,8 @@ class AddStudentForm extends Component {
                       handleBlur,
                       handleSubmit,
                       isSubmitting,
+                      submitForm,
+                      isValid
                       /* and other goodies */
                   }) => (
                     <form onSubmit={handleSubmit}>
@@ -85,7 +87,11 @@ class AddStudentForm extends Component {
                             placeholder='Gender. E.g Male or Female'
                         />
                         {errors.gender && touched.gender && <Tag style={tagStyle}>{errors.gender}</Tag>}
-                        <Button type="submit" disabled={isSubmitting}>
+
+                        <Button
+                            onClick={() => submitForm()}
+                            type="submit"
+                            disabled={isSubmitting || (touched && !isValid)}>
                             Submit
                         </Button>
                     </form>
