@@ -56,10 +56,17 @@ class App extends Component {
                     onOk={this.closeAddStudentModal}
                     onCancel={this.closeAddStudentModal}
                     width={1000}>
-                    <AddStudentForm onSuccess = {() => {
+                    <AddStudentForm
+                        onSuccess = {() => {
                         this.closeAddStudentModal();
                         this.fetchStudents();
-                    }}/>
+                    }}
+                        onFailure = {(error) => {
+                            const message = error.error.message;
+                            const description = error.error.httpStatus;
+                            errorNotification(message, description);
+                    }}
+                    />
                 </Modal>
                 <Footer
                     numberOfStudents={students.length}
