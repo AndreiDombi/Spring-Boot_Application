@@ -17,10 +17,11 @@ public class StudentController {
 
     @GetMapping
     public List<Student> getAllStudents() {
-        return studentService.getAllStudents();
+        throw new IllegalStateException("Cannot get all students");
+        //return studentService.getAllStudents();
     }
     @PostMapping
     public void addNewStudent(@RequestBody Student student) {
-        studentService.addNewStudent(student);
+        studentService.addNewStudent( student);
     }
 }
