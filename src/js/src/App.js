@@ -63,6 +63,7 @@ class App extends Component {
                     }}
                         onFailure = {(error) => {
                             const message = error.error.message;
+                            // noinspection JSUnresolvedVariable
                             const description = error.error.httpStatus;
                             errorNotification(message, description);
                     }}
@@ -83,8 +84,6 @@ class App extends Component {
         }
         if (students && students.length) {
 
-
-
             const columns = [
                 {
                     title: '',
@@ -94,33 +93,12 @@ class App extends Component {
                             {`${student.firstName.charAt(0).toUpperCase()}${student.lastName.charAt(0).toUpperCase()}`}
                         </Avatar>
                     )
-
                 },
-                {
-                    title: 'Student Id',
-                    dataIndex: 'studentId',
-                    key: 'studentId'
-                },
-                {
-                    title: 'First Name',
-                    dataIndex: 'firstName',
-                    key: 'firstName'
-                },
-                {
-                    title: 'Last Name',
-                    dataIndex: 'lastName',
-                    key: 'lastName'
-                },
-                {
-                    title: 'Email',
-                    dataIndex: 'email',
-                    key: 'email'
-                },
-                {
-                    title: 'Gender',
-                    dataIndex: 'gender',
-                    key: 'gender'
-                }
+                {   title: 'Student Id', dataIndex: 'studentId', key: 'studentId' },
+                {   title: 'First Name', dataIndex: 'firstName', key: 'firstName' },
+                {   title: 'Last Name',  dataIndex: 'lastName',  key: 'lastName'  },
+                {   title: 'Email',      dataIndex: 'email',     key: 'email'     },
+                {   title: 'Gender',     dataIndex: 'gender',    key: 'gender'    }
             ];
             return (
                 <Container>
@@ -137,8 +115,7 @@ class App extends Component {
         return (
             <Container>
             <Empty description =
-                       {<h1>No Students found</h1>
-            }/>
+                       {<h1>No Students found</h1>}/>
                 {commonElements()}
             </Container>
         )

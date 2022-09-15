@@ -21,6 +21,7 @@ public class StudentDataAccessService {
 
 
     List<Student> selectAllStudents() {
+        @SuppressWarnings("SqlNoDataSourceInspection")
         String sql = "SELECT student_id, " +
                 "first_name, " +
                 "last_name, " +
@@ -31,6 +32,7 @@ public class StudentDataAccessService {
     }
 
     int insertStudent(UUID studentId, Student student) {
+        @SuppressWarnings("SqlNoDataSourceInspection")
         String sql = "" +
                 "INSERT INTO student (" +
                 " student_id, " +
@@ -38,7 +40,7 @@ public class StudentDataAccessService {
                 " last_name, " +
                 " email, " +
                 " gender) "+
-                " VALUES (?, ?, ?, ?, ?)";
+                " VALUES (?, ?, ?, ?, ?::gender)";
         return jdbcTemplate.update(
                 sql,
                 studentId,
@@ -62,6 +64,7 @@ public class StudentDataAccessService {
     }
     @SuppressWarnings("ConstantConditions")
     boolean isEmailTaken(String email) {
+        @SuppressWarnings("SqlNoDataSourceInspection")
         String sql = "" +
                 "SELECT EXISTS ( " +
                 " SELECT 1 " +
